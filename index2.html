@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Brian Lee Responsive Design Application</title>
+
+
+	<link rel="stylesheet" type="text/css" href="./wJSNova.1.0.css"/>
+	<link rel="stylesheet" type="text/css" href="ruler.css"/>
+	<link rel="stylesheet" type="text/css" href="addon/fold/foldgutter.css"/>
+	<link rel="stylesheet" type="text/css" href="addon/lint/lint.css"/>
+	<link rel="stylesheet" href="lib/codemirror.css">
+	<style>
+		body,html{margin:0px; overflow:hidden;}
+	</style>
+</head>
+<body>
+	<div class="header">
+		<div id="logo"><img src="img/sponsive-logo.png" alt=""></div>
+		<div class="tabcontainer">
+			<div id="result" class="tab activetab">Result</div><div id="html" class="tab">HTML</div><div id="csstab" class="tab">CSS</div><div id="jstab" class="tab">Javascript</div>
+			<div id="update"><input type="button" value="" id="updatebutton"></div> 
+			<div id="query"><input type="button" value="" id="querybutton"></div> 
+			<div id="popout"><input type="button" value="" id="popoutbutton"></div> 
+			<div class="select">
+			<select name="devices" id="devices">
+				<option value="default" selected disabled >Mobile Devices</option>
+				<option value="iphone3">iPhone 3.5"</option>
+				<option value="iphone3l">iPhone 3.5" Landscape</option>
+				<option value="iphone4">iPhone 4"</option>
+				<option value="iphone4l">iPhone 4" Landscape</option>
+				<option value="ipad">iPad</option>
+				<option value="ipadl">iPad Landscape</option>
+				<option value="galaxys4">Galaxy S4</option>
+				<option value="galaxys4l">Galaxy S4 LandScape</option>
+				<option value="nexus7">Nexus 7</option>
+				<option value="nexus7l">Nexus 7 Landscape</option>
+				<option value="nexus1">Nexus One</option>
+				<option value="nexus1l">Nexus One Landscape</option>
+			</select>
+			</div>
+		</div>
+	</div>
+	<div class="main">
+	    <div class="sidebar"><div id="css"></div></div>
+	    <div id="resultdiv" class="html">
+	    	<div id="ruleroverlay" class="toprightradius"></div>
+	    	<div id="vruleroverlay" class="bottomleftradius"></div>
+	    	<div class="slidertool">|||</div>
+	    	<div class="vslidertool">|||</div>
+		    <div id="htmldiv" class="code"><textarea name="htmltext" id="htmltext" cols="30" rows="10"></textarea><div class="textlabel">HTML</div></div>
+		    <div id="cssdiv" class="code"><textarea name="csstext" id="csstext" cols="30" rows="10"></textarea><div class="textlabel">CSS</div></div>
+		    <div id="jsdiv" class="code"><textarea name="jstext" id="jstext" cols="30" rows="10"></textarea><div class="textlabel">Javascript</div></div>
+		    <iframe frameborder="0" id="mypage" class="iframe shadow" width="100%" src="" height="100%"></iframe> 
+		</div>
+	</div>
+</body>
+
+<script type="text/javascript" src="./inc/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="./modernizr.js"></script>
+<script type="text/javascript" src="./wJSNova.1.0.js"></script>
+<script type="text/javascript" src="./brian.splitter.js"></script>
+<script src="jquery.ruler.js"></script>
+<script src="lib/codemirror.js"></script>
+<script src="addon/csslint.js"></script>
+<script src="addon/fold/brace-fold.js"></script>
+<script src="mode/javascript/javascript.js"></script>
+<script src="mode/css/css.js"></script>
+<script src="mode/xml/xml.js"></script>
+<script src="addon/fold/foldcode.js"></script>
+<script src="addon/fold/foldgutter.js"></script>
+<script src="addon/fold/xml-fold.js"></script>
+<script src="addon/jshint.js"></script>
+<script src="addon/lint/lint.js"></script>
+<script src="addon/lint/javascript-lint.js"></script>
+<script src="addon/lint/css-lint.js"></script>
+<script src="addon/emmet.js"></script>
+<script src="addon/edit/matchbrackets.js"></script>
+<script src="addon/edit/closebrackets.js"></script>
+<script src="addon/edit/closetag.js"></script>
+<script>
+Reflexx();
+function Reflexx(){
+	var disFromOrigin;
+	var iframeWidth  = $('.iframe').width();
+	var iframeHeight = $('.iframe').height();
+	var iframeOffset = $('.iframe').offset();
+	var iframeDoc; 
+	var htmlEditor, cssEditor, jsEditor;
+	var popupOpen = false;
+	var popup = "";
+		
+	var s = {
+		init: function(){
+				s.buildWindows();
+				s.navigation();
+				s.resizeH();
+				s.resizeTool();
+				s.updateButton();
+				s.queryButton();
+				s.resizeRulOverlay();
+				s.placeSliderTool();
+				s.oniFrameLoad();
+				s.popoutButton();
+				s.keyStroke();
+				s.onWindowResize();
+				s.verticalResizeTool();
+				s.resizeV();
+				s.mobileSelect();
+				s.resetMobileDevices();
+				s.fitIframe();
+
+		},
+		oniFrameLoad: function(){
+			$('iframe').load(function(){
+				iframeDoc =  $(this).contents().find('body');
+				s.iframeClick();
+			});
+		},
+
+		resizeRulOverlay: function(){
+			$('#ruleroverlay').css({'width': iframeWidth - 19}).html('<span>' + (iframeWidth-19) + 'px</span>');
+			$('#vruleroverlay').html('<span>' + (iframeHeight-19) + 'px</span>');
+		},
+		fitIframe: function(){
+						var resultMargin = parseInt($('#resultdiv').css("margin-right"));
+						var offset       = iframeOffset;
+						var resultWidth;
+						var resultHeight;
+						var windowWidth = $(window).width();
+						var windowHeight= $(window).height();
+						var newWidth    = windowWidth - offset.left - resultMargin;
+						var newHeight   = windowHeight - offset.top;
+									     
+						iframeWidth = $('.iframe').width();
+						iframeHeight = $('.iframe').height();
+
+						resultWidth = $('#resultdiv').width();
+						resultHeight = $('#resultdiv').height();
+
+						$('#resultdiv').css({'width': newWidth});
+						$('#resultdiv').css({'height': newHeight});
+
+						$('.iframe').css({'width': newWidth -19});
+						$('#ruleroverlay').css({'width': newWidth -19});
+						$('.slidertool').css({'left' : newWidth - 19});
+
+						$('.iframe').css({'height': newHeight -19});
+						$('#vruleroverlay').css({'height': newHeight});
+						$('.vslidertool').css({'top' : newHeight - 19});
+									      	
+									      
+		},
+		placeSliderTool: function(){
+			$('.slidertool').css({'left' : iframeWidth - 20});
+		},
+		buildWindows: function(){
+						var htmlTextArea = $('#htmltext');
+						var cssTextArea  = $('#csstext');
+						var jsTextArea   = $('#jstext');
+
+						htmlEditor   = CodeMirror.fromTextArea(htmlTextArea.get(0), {
+											mode:          "text/html",
+											lineNumbers:   true,
+											matchBrackets: true,
+											foldGutter:    true,
+											matchTags:     true,
+											autoCloseTags: true,
+											gutters:       ["CodeMirror-linenumbers", 
+															"CodeMirror-foldgutter"]
+										});
+
+						cssEditor = CodeMirror.fromTextArea(cssTextArea.get(0), {
+											mode:         "text/css",
+											lineNumbers:   true,
+											matchBrackets: true,
+											foldGutter:    true,
+											value:         '12',
+											lint:          true,
+											lintWith:      {
+														   getAnnotations: CodeMirror.cssValidator,
+														   onUpdateLinting: function (lintErrorsWarnings) {}
+											               },
+											gutters:       ["CodeMirror-linenumbers", 
+															"CodeMirror-foldgutter", 
+															"CodeMirror-lint-markers"]
+										});
+
+						jsEditor = CodeMirror.fromTextArea(jsTextArea.get(0), {
+											mode:         "text/javascript",
+											lineNumbers:   true,
+											matchBrackets: true,
+											foldGutter:    true,
+											lint:          true,
+								autoCloseBrackets:         true,
+											lintWith:      {
+														   getAnnotations: CodeMirror.javascriptValidator,
+														   onUpdateLinting: function (lintErrorsWarnings) {}
+											               },
+											gutters:       ["CodeMirror-linenumbers", 
+															"CodeMirror-foldgutter", 
+															"CodeMirror-lint-markers"]
+										});
+
+						$('.html').ruler();
+
+						htmlEditor.foldCode(CodeMirror.Pos(0, 0));
+						htmlEditor.foldCode(CodeMirror.Pos(21, 0));
+						htmlEditor.setValue('');
+
+						jsEditor.foldCode(CodeMirror.Pos(0, 0));
+						jsEditor.setValue('');
+
+						cssEditor.foldCode(CodeMirror.Pos(0, 0));
+						cssEditor.setValue('');
+		},
+
+		buildHTML: function(){
+						var html   = htmlEditor.getValue();
+						var css    = cssEditor.getValue();
+						var js     = jsEditor.getValue();
+						var result = '<html><head><style>' + css + '</style><script type="text/javascript" src="./inc/jquery-1.11.0.min.js"><\/script></head><body id="reflexx">' + html + '<script>' + js + '<\/script></body></html>';
+						
+						return result; 
+		},
+		buildBody: function(){
+						var html   = htmlEditor.getValue();
+						var css    = cssEditor.getValue();
+						var js     = jsEditor.getValue();
+						var result = html + '<script>' + js + '<\/script>';
+						
+						return result; 
+		},
+		buildCSS: function(){
+						var css    = cssEditor.getValue();
+						
+						var result = css;
+						
+						return result; 
+		},
+		refreshiFrame: function(){
+			s.writeResult(s.buildHTML());
+		},
+		keyStroke: function(){
+
+				$('#jsdiv').keyup(function(){
+
+					if (popup.closed === false){ s.refreshPopup('jsdiv'); }
+						
+				});
+
+				$('#htmldiv, #cssdiv').keyup(function(){
+
+					if (popup.closed === false){ s.refreshPopup(); }
+						
+				});
+			
+		},
+		refreshPopup: function(src){
+			var w;
+		 	        if (popup.closed !== false){
+						w = window.open("", "myPopout");
+						popup = w;
+					}else{
+						w = popup;
+					}
+					
+					var doc = $(w.document).contents().html();
+					
+					
+
+					if (doc.length <= 26 || src === 'jsdiv'){
+						var d = w.document.open();
+						d.write(s.buildHTML());
+						d.close();
+						
+						console.log('new doc length is' + doc.length);
+					}else{
+						 $(w.document).contents().find('style').html(s.buildCSS);
+						 $(w.document).contents().find('body').html(s.buildBody); 
+						 console.log('new doc length is' + doc.length);
+					}	
+					// $(w.document).contents().find('style').html(s.buildCSS);
+					// $(w.document).contents().find('body').html(s.buildBody); 
+
+					//d.write(s.buildHTML());
+					//d.close();
+		},
+		popoutButton: function(){
+			$('#popoutbutton').click(function(){
+				s.refreshPopup(s.buildHTML());
+			});
+		},
+		updateButton: function(){
+						$('#updatebutton').click(s.refreshiFrame);
+		},
+		queryButton: function(){
+						$('#querybutton').click(function(){
+							var width = $('.iframe').width() + 'px';
+							cssEditor.replaceRange('\n @media (max-width: '+ width +') { \n\n\n }', CodeMirror.Pos(cssEditor.lastLine()));
+						});
+
+		},
+
+		createMediaQuery: function(){
+							var width = $('.iframe').width() + 'px';
+							cssEditor.replaceRange('\n @media (max-width: ' + width + ') { \n\n\n }', CodeMirror.Pos(cssEditor.lastLine()));
+		},
+
+		navigation: function(){
+						$('.tab').click(function () {
+							$('.tab').removeClass('activetab');
+							$(this).addClass('activetab');
+						});
+						$('#html').click(function () {
+							$('.iframe, .ruler, .slidertool, #ruleroverlay, .vslidertool, #vruleroverlay').css({
+							  'z-index': '-9999',
+							  'position': 'absolute'
+							});;
+							$('#resultdiv').css({
+							  'padding': 0
+							});
+							$('#htmldiv').show().css({
+							  'position': 'relative',
+							  'z-index': '9999'
+							});
+						});
+						$('#result').click(function () {
+							s.refreshiFrame();
+
+							$('#cssdiv, #htmldiv, #jsdiv').css({
+							  'z-index': '-9999',
+							  'position': 'absolute'
+							});
+							$('.iframe, .ruler, .slidertool, #ruleroverlay, .vslidertool, #vruleroverlay').show().css({
+							  'z-index': '9999'
+							});
+							$('.iframe').show().css({
+							 
+							  'z-index': '9999'
+							});
+							$('#resultdiv').css({
+							  'padding-top': '19px',
+							  'padding-left': '19px'
+							});
+
+						});
+						$('#csstab').click(function () {
+							$('.iframe, .ruler, .slidertool, #htmldiv, #ruleroverlay, .vslidertool, #vruleroverlay').css({
+							  'z-index': '-9999',
+							  'position': 'absolute'
+							});
+							$('#resultdiv').css({
+							  'padding': 0
+							});
+							$('#cssdiv').show().css({
+							  'position': 'relative',
+							  'z-index': '9999'
+							});
+						});
+						$('#jstab').click(function () {
+							$('.iframe, .ruler, .slidertool, #htmldiv, #cssdiv, #ruleroverlay, .vslidertool, #vruleroverlay').css({
+							  'z-index': '-9999',
+							  'position': 'absolute'
+							});
+							$('#resultdiv').css({
+							  'padding': 0
+							});
+							$('#jsdiv').show().css({
+							  'position': 'relative',
+							  'z-index': '9999'
+							});
+						});
+		},
+
+		highlight: function(el){
+						var highlighter   = $(iframeDoc).find('#highlighter');
+						var elOffset      = $(el).offset();
+						var elMarginLeft  = parseInt($(el).css('margin-left'));
+						var elMarginRight = parseInt($(el).css('margin-right'));
+						var elMarginBot   = parseInt($(el).css('margin-bottom'));
+						var elMarginTop   = parseInt($(el).css('margin-top'));
+						var elPadLeft     = parseInt($(el).css('padding-left'));
+						var elPadRight    = parseInt($(el).css('padding-right'));
+						var elPadBot      = parseInt($(el).css('padding-bottom'));
+						var elPadTop      = parseInt($(el).css('padding-top'));
+
+						console.log(elOffset.top - elMarginTop);
+						if (highlighter.length !== 0) {
+							$(highlighter).show()									
+								.css({
+									'z-index'      : '99999999',
+									'position'     : 'absolute',
+
+									'width'        : $(el).width() ,
+									'height'       : $(el).height(),
+
+									'top'          : elOffset.top - (elMarginTop*2),
+									'left'         : elOffset.left - (elMarginLeft*2) ,
+									'border-left'  : elMarginLeft + 'px solid rgba(0,255,255,0.4)',
+									'border-right' : elMarginRight + 'px solid rgba(0,255,255,0.4)',
+									'border-top'   : elMarginTop + 'px solid rgba(0,255,255,0.4)',
+									'border-bottom': elMarginBot +'px solid rgba(0,255,255,0.4)',
+									
+									'box-shadow'   : 'inset ' + elPadLeft + 'px 0 0 rgba(0,0,255,0.4),inset -' + elPadRight + 'px 0 0 rgba(0,0,255,0.4),inset 0 ' + elPadTop + 'px 0 rgba(0,0,255,0.4),inset 0 -' + elPadBot + 'px 0 rgba(0,0,255,0.4)',
+									
+								
+									'background': 'rgba(0,255,255,0.3)'
+								});
+						} else {
+							
+							$(iframeDoc)
+								.prepend('<div id="highlighter" class="highlighter"></div>');
+
+							$(iframeDoc)
+								.find('#highlighter')
+								
+									.css({
+									'z-index'      : '99999999',
+									'position'     : 'absolute',
+
+									'width'        : $(el).width() ,
+									'height'       : $(el).height(),
+
+									'top'          : elOffset.top - (elMarginTop*2),
+									'left'         : elOffset.left - (elMarginLeft*2),
+									'border-left'  : elMarginLeft + 'px solid rgba(0,255,255,0.4)',
+									'border-right' : elMarginRight + 'px solid rgba(0,255,255,0.4)',
+									'border-top'   : elMarginTop + 'px solid rgba(0,255,255,0.4)',
+									'border-bottom': elMarginBot +'px solid rgba(0,255,255,0.4)',
+									'box-shadow'   : 'inset ' + elPadLeft + 'px 0 0 rgba(0,0,255,0.4),inset -' + elPadRight + 'px 0 0 rgba(0,0,255,0.4),inset 0 ' + elPadTop + 'px 0 rgba(0,0,255,0.4),inset 0 -' + elPadBot + 'px 0 rgba(0,0,255,0.4)',
+									
+								
+									'background': 'rgba(0,255,255,0.3)'
+								
+								});
+						}
+		},
+
+		iframeClick: function(){
+			$(iframeDoc).on('click',  function (e) {
+				if(e.target.id !== 'highlighter') {
+					s.updateCssProperties(e.target);
+					s.highlight(e.target);
+				}else{
+					
+					$(this).find('#highlighter').remove();
+				}
+			});
+		},
+
+		updateCssProperties: function(element){
+								var el       = element;
+								var elOffset = $(el).offset();
+								
+
+								var attr 	 = ['font-family', 'font-size', 'font-weight', 'font-style', 'color',
+												'text-transform', 'text-decoration', 'letter-spacing', 'word-spacing',
+												'line-height', 'text-align', 'vertical-align', 'direction', 'background-color',
+												'background-image', 'background-repeat', 'background-position',
+												'background-attachment', 'opacity', 'width', 'height', 'top', 'right', 'bottom',
+												'left', 'margin-top', 'margin-right', 'margin-bottom', 'margin-left',
+												'padding-top', 'padding-right', 'padding-bottom', 'padding-left',
+												'border-top-width', 'border-right-width', 'border-bottom-width',
+												'border-left-width', 'border-top-color', 'border-right-color',
+												'border-bottom-color', 'border-left-color', 'border-top-style',
+												'border-right-style', 'border-bottom-style', 'border-left-style', 'position',
+												'display', 'visibility', 'z-index', 'overflow-x', 'overflow-y', 'white-space',
+												'clip', 'float', 'clear', 'cursor', 'list-style-image', 'list-style-position',
+												'list-style-type', 'marker-offset'
+											   ];
+								var myCSS = $(el).css(attr);
+
+								$('#css').html('');
+								$('#css').append('<div class="elinfo">Element: &lt;' + el.tagName.toLowerCase() + '&gt;<br> ID: ' + el.id + '<br> Class: ' + el.className + '<br><br><br></div><div class="styleheader">Styles</div>');
+
+								$.each(myCSS, function (key, val) {
+									if (val !== 0 & val !== '0px' & val !== 'none' & val !== 'normal' & val !== 'auto' & val !== 'transparent' & val !== 'visible' & val !== '0%' & val !== 'static' & val !== 'baseline' & val !== 'ltr' & val !== '0% 0%' & val !== 'disc' & val !== 'scroll' & val !== 'outside' & val !== 'repeat' & val !== 'start') {
+										$('#css').append('<div class="propval"><span class="property">' + s.properCase(key) + '</span><span class="value">' + val + '</span></div>');
+									}
+								});
+		},
+
+		resizeH: function(){
+					$(document).on('click', '.hRule,#ruleroverlay', function (e) {
+						var mouseX    = e.pageX - 9;
+						disFromOrigin = mouseX - iframeOffset.left - 9;
+
+						if (mouseX > 100){
+						$('.slidertool').css({'left': mouseX - 9});
+						$('.iframe').css({'width': disFromOrigin});
+
+						$('#size').html('Window Size: <span>' + disFromOrigin + 'px</span>');
+						$('#ruleroverlay')
+							.css({'width': disFromOrigin})
+							.html('<span>' + (disFromOrigin) + 'px</span>');
+							s.resetMobileDevices();
+						}
+	  				});
+		},
+		resizeV: function(){
+					$(document).on('click', '.vRule,#vruleroverlay', function (e) {
+						var mouseY    = e.pageY ;
+						disFromOrigin = mouseY ;
+
+						if (mouseY > 100){
+						$('.vslidertool').css({'top': mouseY });
+						$('.iframe').css({'height': disFromOrigin});
+
+						$('#vsize').html('Window Size: <span>' + disFromOrigin + 'px</span>');
+						$('#vruleroverlay')
+							.css({'height': disFromOrigin + 19})
+							.html('<span>' + (disFromOrigin -9) + 'px</span>');
+							s.resetMobileDevices();
+							s.updateSizeDisplay();
+						}
+	  				});
+		},
+		updateSizeDisplay: function(customString){
+			var size = $('.iframe').width();
+			if (customString){
+				customString=customString;
+			}else{
+				customString = '';
+			}
+			$('#ruleroverlay').html('<span>'+ customString + size + 'px</span>');
+		},
+		updateVSizeDisplay: function(){
+			var size = $('.iframe').height();
+
+
+			$('#vruleroverlay').html('<span>'  + size + 'px</span>');
+		},
+		resizeTool: function(){
+						$(document).on('mousedown', '.slidertool', function () {
+							var totalWidth = $('#resultdiv').width();
+							
+
+							$(this).addClass('draggable');
+
+							//Create overlay to prevent hovering over iFrame from messing up mouse events
+							$('body').append('<div class="iframeCover"></div>');
+					
+							$(document).on('mousemove', function (e) {
+								var mouseX = e.pageX - 9;
+
+								disFromOrigin = mouseX - iframeOffset.left - 9;
+								
+								if (disFromOrigin <= totalWidth && disFromOrigin > 100){
+									$('.draggable').css({'left': mouseX - 9});
+									$('.iframe').css({'width': disFromOrigin});
+									$('#ruleroverlay').css({'width': disFromOrigin})
+										
+									s.updateSizeDisplay();
+								}
+
+								
+						});
+
+							$(document).on('mouseup', function (e) {
+								
+								$(document).off('mousemove');
+								$('.slidertool').removeClass('draggable');
+								$('.iframeCover').remove();
+								s.resetMobileDevices();
+							});
+						});
+		},
+		verticalResizeTool: function(){
+						$(document).on('mousedown', '.vslidertool', function () {
+							var totalHeight = $('#resultdiv').height();
+							
+
+							$(this).addClass('draggable');
+
+							//Create overlay to prevent hovering over iFrame from messing up mouse events
+							$('body').append('<div class="iframeCover"></div>');
+					
+							$(document).on('mousemove', function (e) {
+								var mouseY = e.pageY;
+
+								disFromOrigin = mouseY -27;
+								
+								if (disFromOrigin <= totalHeight && disFromOrigin > 100){
+									$('.draggable').css({'top': mouseY -27});
+									$('.iframe').css({'height': disFromOrigin});
+									$('#vruleroverlay').css({'height': disFromOrigin + 19})
+										
+									s.updateVSizeDisplay();
+
+								}
+
+								
+						});
+
+							$(document).on('mouseup', function (e) {
+								$(document).off('mousemove');
+								$('.vslidertool').removeClass('draggable');
+								$('.iframeCover').remove();
+								s.updateSizeDisplay();
+								s.resetMobileDevices();
+							});
+						});
+		},
+		onWindowResize: function(){
+			var resultMargin = parseInt($('#resultdiv').css("margin-right"));
+			var offset       = iframeOffset;
+			var resultWidth;
+			var resultHeight;
+						
+						$(window).resize(function () {
+									      var windowWidth = $(window).width();
+									      var windowHeight= $(window).height();
+									      var newWidth    = windowWidth - offset.left - resultMargin;
+									      var newHeight   = windowHeight - offset.top;
+									     
+									      iframeWidth = $('.iframe').width();
+									      iframeHeight = $('.iframe').height();
+
+									      resultWidth = $('#resultdiv').width();
+									      resultHeight = $('#resultdiv').height();
+									      
+									      $('#resultdiv').css({'width': newWidth});
+									      $('#resultdiv').css({'height': newHeight});
+									      
+									      if (iframeWidth >= resultWidth){
+
+									      	$('.iframe').css({'width': newWidth -19});
+									      	$('#ruleroverlay').css({'width': newWidth -19});
+									      	$('.slidertool').css({'left' : newWidth - 19});
+
+									      	 
+									      	 s.updateSizeDisplay();
+									      	 s.resetMobileDevices();
+									      	 
+									      }
+									      if (iframeHeight >= resultHeight){
+
+									      	$('.iframe').css({'height': newHeight -19});
+									      	$('#vruleroverlay').css({'height': newHeight});
+									      	$('.vslidertool').css({'top' : newHeight - 19});
+									      	
+									      	 s.updateVSizeDisplay();
+									      	 s.updateSizeDisplay();
+									      	 s.resetMobileDevices();
+									      }
+									     
+									     
+				  		});
+		},
+
+		writeResult: function(result) {
+					      var iframe = $('.iframe').get(0);
+
+					      if (iframe.contentDocument) doc = iframe.contentDocument;
+					      else if (iframe.contentWindow) doc = iframe.contentWindow.document;
+					      else doc = iframe.document;
+
+					      doc.open();
+					      doc.writeln(result);
+					      doc.close();
+		},
+
+		properCase: function(s) {
+						return s.toLowerCase().replace(/(^([a-zA-Z\p{M}]))|([ -][a-zA-Z\p{M}])/g,
+						function ($1) {
+							return $1.toUpperCase();
+						});
+		},
+		mobileSelect: function(){
+			$('#devices').change(function() {
+			    var device = $(this).val();
+			    var deviceText = $('#devices option[value="'+ device +'"]').text();
+			    var width;
+			    var height;
+
+
+			    switch(device)
+				{
+				case 'iphone3':
+					width = 320 ;
+					height = 460 ;
+					break;
+				case 'iphone3l':
+					width = 460 ;
+					height = 320 ;
+					break;
+				case 'iphone4':
+					width = 320 ;
+					height = 548 ;
+					break;
+				case 'iphone4l':
+					width = 568 ;
+					height = 300 ;
+					break;
+				case 'ipad':
+					width = 768 ;
+					height = 1024 ;
+					break;
+				case 'ipadl':
+					width = 1024 ;
+					height = 768 ;
+					break;
+				case 'galaxys4l':
+					width = 640 ;
+					height = 360  ;
+					break;
+				case 'galaxys4':
+					width = 360 ;
+					height = 640 ;
+					break;
+				case 'nexus7':
+					width = 601 ;
+					height = 881 ;
+					break;
+				case 'nexus7l':
+					width = 881 ;
+					height = 601 ;
+					break;
+				case 'nexus1':
+					width = 480 ;
+					height = 800 ;
+					break;
+				case 'nexus1l':
+					width = 800 ;
+					height = 480 ;
+					break;
+				default:
+				  width = 960 ;
+					height = '100%' ;
+				}
+
+			    s.customResize(width, height, deviceText);
+			});
+		},
+		customResize: function(width, height, device){
+
+
+				      	$('.iframe').css({'width': width });
+				      	$('#ruleroverlay').css({'width': width });
+				      	$('.slidertool').css({'left' : width });
+				     
+				      
+				      	$('.iframe').css({'height': height });
+				      	$('#vruleroverlay').css({'height': height + 19});
+				      	$('.vslidertool').css({'top' : height });
+				      
+				      s.updateSizeDisplay(device + ' - ');
+				      s.updateVSizeDisplay();
+				      s.resizeWindow();
+		},
+		resetMobileDevices: function(){
+								var element = document.getElementById('devices');
+								element.value = 'default'
+		}
+	};
+	s.init();
+}
+
+
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+

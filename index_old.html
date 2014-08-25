@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Brian Lee Responsive Design Application</title>
+
+	<script type="text/javascript" src="./inc/jquery-1.11.0.min.js"></script>
+		<script type="text/javascript" src="./modernizr.js"></script>
+	<link rel="stylesheet" type="text/css" href="./wJSNova.1.0.css"/>
+	<link rel="stylesheet" type="text/css" href="ruler.css"/>
+	<link rel="stylesheet" type="text/css" href="addon/fold/foldgutter.css"/>
+	<link rel="stylesheet" type="text/css" href="addon/lint/lint.css"/>
+	<script type="text/javascript" src="./wJSNova.1.0.js"></script>
+	<script type="text/javascript" src="./brian.splitter.js"></script>
+	<script src="jquery.ruler.js"></script>
+	<style>
+		body,html{margin:0px; overflow:hidden;}
+	</style>
+
+	<!-- Create a simple CodeMirror instance -->
+<link rel="stylesheet" href="lib/codemirror.css">
+
+</head>
+<body>
+
+<!-- 	<div id="JSNova" style="width:100%;height:0px;"></div> -->
+<!doctype html>
+<div class="header">
+	<div id="logo">Responsive Tool</div>
+	<div class="tabcontainer">
+		<div id="result" class="tab activetab">Result</div><div id="html" class="tab">HTML</div><div id="csstab" class="tab">CSS</div><div id="jstab" class="tab">Javascript</div>
+		<div id="update"><input type="button" value="Update" id="updatebutton"></div> 
+		<div id="query"><input type="button" value="Add Query" id="querybutton"></div> 
+	</div>
+</div>
+<div class="main">
+	
+
+    <div class="sidebar">
+
+    	<div id="css"></div>
+    </div>
+    
+    <div id="resultdiv" class="html">
+    	<div id="ruleroverlay" class="toprightradius"></div>
+    	<div class="slidertool">|||</div>
+	    <div id="htmldiv" class="code"><textarea name="htmltext" id="htmltext" cols="30" rows="10"></textarea></div>
+	    <div id="cssdiv" class="code"><textarea name="csstext" id="csstext" cols="30" rows="10"></textarea></div>
+	     <div id="jsdiv" class="code"><textarea name="jstext" id="jstext" cols="30" rows="10"></textarea></div>
+	    <iframe frameborder="0" id="mypage" class="iframe" width="100%" src="site/index.php" height="100%"></iframe> 
+	</div>
+</div>
+
+</body>
+
+<script src="lib/codemirror.js"></script>
+<script src="addon/csslint.js"></script>
+<script src="addon/fold/brace-fold.js"></script>
+<script src="mode/javascript/javascript.js"></script>
+<script src="mode/css/css.js"></script>
+<script src="mode/xml/xml.js"></script>
+<script src="addon/fold/foldcode.js"></script>
+<script src="addon/fold/foldgutter.js"></script>
+<script src="addon/fold/xml-fold.js"></script>
+<script src="addon/jshint.js"></script>
+<script src="addon/lint/lint.js"></script>
+<script src="addon/lint/javascript-lint.js"></script>
+<script src="addon/lint/css-lint.js"></script>
+
+
+
+
+
+<script>
+
+  var htmlTextArea = $('#htmltext');
+  var cssTextArea = $('#csstext');
+  var jsTextArea = $('#jstext');
+  window.onload = function() {
+  var htmlEditor = CodeMirror.fromTextArea(htmlTextArea.get(0), {
+					  	mode: "text/html",
+					  	lineNumbers: true,
+					    matchBrackets: true,
+					 	foldGutter: true,
+					    gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+  					});
+
+ 	htmlEditor.foldCode(CodeMirror.Pos(0, 0));
+  	htmlEditor.foldCode(CodeMirror.Pos(21, 0));
+
+    var cssEditor = CodeMirror.fromTextArea(cssTextArea.get(0), {
+					  	mode: "text/css",
+					  	lineNumbers: true,
+					    matchBrackets: true,
+					 	foldGutter: true,
+					 	value: '12',
+					    lint: true,
+					 	lintWith: {
+		    				getAnnotations: CodeMirror.cssValidator,
+		    				onUpdateLinting: function(lintErrorsWarnings) {}
+					  	},
+					    gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter","CodeMirror-lint-markers"]
+  					});
+    cssEditor.foldCode(CodeMirror.Pos(0, 0));
+
+
+	var jsEditor = CodeMirror.fromTextArea(jsTextArea.get(0), {
+					  	mode: "text/javascript",
+					  	lineNumbers: true,
+					    matchBrackets: true,
+					 	foldGutter: true,
+					 	lint: true,
+					 	lintWith: {
+		    				getAnnotations: CodeMirror.javascriptValidator,
+		    				onUpdateLinting: function(lintErrorsWarnings) {}
+					  	},
+					    gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter","CodeMirror-lint-markers"]
+  					});
+    cssEditor.foldCode(CodeMirror.Pos(0, 0));
+
+	cssEditor.setValue('');
+	htmlEditor.setValue('');
+	jsEditor.setValue('');
+
+
+
+    $('#updatebutton').click(function(){
+				var html = htmlEditor.getValue();
+	            var css = cssEditor.getValue();
+	            var result = '<html><head><style>' + css + '</style></head><body>' + html + '</body></html>';
+
+	            writeResult(result);
+	            var w = window.open("Surprise", "#");
+				var d = w.document.open();
+				d.write(result);
+				d.close();
+			});
+
+    $('#htmldiv, #cssdiv, #jsdiv').keyup(function(){
+		var html = htmlEditor.getValue();
+        var css = cssEditor.getValue();
+        var js = jsEditor.getValue();
+        var result = '<html><head><style>' + css + '</style><script type="text/javascript" src="./inc/jquery-1.11.0.min.js"><\/script></head><body>' + html + '<script>'+ js +'<\/script></body></html>';
+		var w = window.open("Surprise", "#");
+		var d = w.document.open();
+		d.write(result);
+		d.close();
+    });
+        $('#querybutton').click(function(){
+    	var width = $('.iframe').width() + 'px';
+		cssEditor.replaceRange(
+			'\n @media (max-width: '+ width +') { \n\n\n }', CodeMirror.Pos(cssEditor.lastLine())
+		);
+
+    });
+    function writeResult (result) {
+	            var iframe = $('.iframe').get(0);
+
+	            if (iframe.contentDocument) doc = iframe.contentDocument;
+	            else if (iframe.contentWindow) doc = iframe.contentWindow.document;
+	            else doc = iframe.document;
+
+	            doc.open();
+	            doc.writeln(result);
+	            doc.close();
+        	}
+
+};
+
+			
+            
+
+
+            
+</script>
+<script>
+	$('.tab').click(function(){
+		$('.tab').removeClass('activetab');
+		$(this).addClass('activetab');
+	});
+	$('#html').click(function(){
+
+		$('.iframe, .ruler, .slidertool, #ruleroverlay').css({'z-index' : '-9999', 'position': 'absolute'});;
+		$('#resultdiv').css({'padding': 0});
+		$('#htmldiv').show().css({'position': 'relative', 'z-index' : '9999'});
+	});
+	$('#result').click(function(){
+		//$('#cssdiv, #htmldiv, #jsdiv').hide();
+		$('#cssdiv, #htmldiv, #jsdiv').css({'z-index' : '-9999', 'position': 'absolute'});
+		$('.iframe, .ruler, .slidertool, #ruleroverlay').show().css({'z-index' : '9999'});
+		$('.iframe').show().css({'position': 'relative', 'z-index' : '9999'});
+		$('#resultdiv').css({'padding-top': '19px', 'padding-left': '19px'});
+
+	});
+	$('#csstab').click(function(){
+		$('.iframe, .ruler, .slidertool, #htmldiv, #ruleroverlay').css({'z-index' : '-9999', 'position': 'absolute'});
+		$('#resultdiv').css({'padding': 0});
+		$('#cssdiv').show().css({'position': 'relative', 'z-index' : '9999'});
+	});
+	$('#jstab').click(function(){
+		$('.iframe, .ruler, .slidertool, #htmldiv, #cssdiv, #ruleroverlay').css({'z-index' : '-9999', 'position': 'absolute'});
+		$('#resultdiv').css({'padding': 0});
+		$('#jsdiv').show().css({'position': 'relative', 'z-index' : '9999'});
+	});
+</script>
+<script>
+	var iframeWidth  = $('.iframe').width();
+	var iframeOffset = $('.iframe').offset();
+	var disFromOrigin;
+	var iframeDoc;
+
+	
+	$('iframe').load(function(){
+		$('#ruleroverlay').css({'width': iframeWidth - 19}).html('<span>' + (iframeWidth-19) + 'px</span>');
+		$('.slidertool').css({'left' : iframeWidth - 20});
+		iframeDoc =  $(this).contents().find('body');
+		 $(iframeDoc).on('click',  function (event) {
+		 	var el = event.target;
+		 	var elOffset = $(el).offset();
+		 	var highlighter = $(iframeDoc).find('#highlighter');
+		 	
+		 	var attr = ['font-family','font-size','font-weight','font-style','color',
+			            'text-transform','text-decoration','letter-spacing','word-spacing',
+			            'line-height','text-align','vertical-align','direction','background-color',
+			            'background-image','background-repeat','background-position',
+			            'background-attachment','opacity','width','height','top','right','bottom',
+			            'left','margin-top','margin-right','margin-bottom','margin-left',
+			            'padding-top','padding-right','padding-bottom','padding-left',
+			            'border-top-width','border-right-width','border-bottom-width',
+			            'border-left-width','border-top-color','border-right-color',
+			            'border-bottom-color','border-left-color','border-top-style',
+			            'border-right-style','border-bottom-style','border-left-style','position',
+			            'display','visibility','z-index','overflow-x','overflow-y','white-space',
+			            'clip','float','clear','cursor','list-style-image','list-style-position',
+			            'list-style-type','marker-offset'];
+			            
+			var myCSS = $(el).css(attr);
+			$('#css').html('');
+			$('#css').append('<div class="elinfo">Element: &lt;' + el.tagName.toLowerCase() + '&gt;<br> ID: ' + el.id + '<br> Class: ' + el.className + '<br><br><br></div><div class="styleheader">Styles</div>');
+
+			$.each(myCSS, function(key, val){
+				if (val !== 0 & val !== '0px' &  val !== 'none' &  val !== 'normal' &  val !== 'auto' &  val !== 'transparent' & val !== 'visible' & val !== '0%' & val !== 'static' & val !== 'baseline' & val !== 'ltr' & val !== '0% 0%' & val !== 'disc' & val !== 'scroll' & val !== 'outside' & val !== 'repeat' & val !== 'start') {
+					$('#css').append('<div class="propval"><span class="property">' +  properCase(key) + '</span><span class="value">' + val + '</span></div>');
+				}
+			});
+		 	
+
+		 	if (highlighter.length !== 0){
+		 		
+		 			$(iframeDoc).find('#highlighter').css({'z-index':'99999999', 'position' : 'relative', 'width': $(el).width(), 'height' : $(el).height(), 'left' : elOffset.left, 'top' : elOffset.top });
+		 			$(iframeDoc).find('#highlighter').click(function(){
+		 			$(iframeDoc).find('#highlighter').css({'width': '0', 'height' : '0'});
+		 		});
+		 	}else{
+		 		
+		 		$(iframeDoc).find('#nav-div').append('<div id="highlighter"></div>');
+		 		$(iframeDoc).find('#highlighter').css({'z-index':'999999','border': '3px solid white', 'background': 'rgba(0,255,255,0.3)','position' : 'absolute', 'width': $(el).width(), 'height' : $(el).height(), 'left' : elOffset.left, 'top' : elOffset.top });
+		 	}
+		 	
+	    	return false;
+		});
+		
+	});
+
+
+	$('.html').ruler(); 
+
+
+     $(document).on('mousedown', '.slidertool', function(){
+     	$(this).addClass('draggable');
+     	
+     	$(document).on('mousemove', function(e){
+     		var mouseX = e.pageX - 9;
+     		disFromOrigin = mouseX - iframeOffset.left - 9;
+     		$('.draggable').css({'left' : mouseX - 9});
+     		$('.iframe').css({'width' : disFromOrigin});
+     		$('#ruleroverlay').css({'width': disFromOrigin }).html('<span>' + disFromOrigin + 'px</span>');
+     	});
+
+
+
+	    $(document).on('mouseup', function(e){
+	    	$(document).off('mousemove');
+	     	$('.slidertool').removeClass('draggable');
+	    });
+     });
+
+     $(document).on('click', '.hRule,#ruleroverlay', function(e){
+     	var mouseX = e.pageX - 9;
+     	disFromOrigin = mouseX - iframeOffset.left - 9;
+     	console.log(disFromOrigin);
+     	mouseX = e.pageX -9;
+     		$('.slidertool').css({'left' : mouseX - 9 });
+     		$('.iframe').css({'width' : disFromOrigin});
+     		$('#size').html('Window Size: <span>' + disFromOrigin + 'px</span>');
+     		$('#ruleroverlay').css({'width': disFromOrigin}).html('<span>' + (disFromOrigin) + 'px</span>');
+     });
+
+
+     $(window).resize(function(){
+     	var windowWidth = $(window).width();
+     	var offset = iframeOffset;
+     	var newWidth = windowWidth - offset.left;
+
+     	$('#resultdiv').css({'width': newWidth});
+     });
+function escapeHtml(unsafe) {
+    return unsafe
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+         .replace(/'/g, "&#039;");
+ }
+
+function properCase(s){
+
+	  return s.toLowerCase().replace(/(^([a-zA-Z\p{M}]))|([ -][a-zA-Z\p{M}])/g,
+	          function($1) { return $1.toUpperCase(); });
+
+}
+
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+

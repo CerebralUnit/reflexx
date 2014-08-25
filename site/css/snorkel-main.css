@@ -1,0 +1,257 @@
+
+
+body                                 {
+                                         background: #FFF;
+                                         font-family: Arial, Helvetica, "sans-serif";
+                                         font-size: 100%;
+                                         margin: 0;
+                                         padding: 0;
+                                     }
+
+* html body                          {
+                                         margin: 0px !important
+                                     }
+#container							 {
+									     width: 100%;
+									     margin: 0;
+									     padding: 0;
+									     background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSI2MiUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMCIvPgogICAgPHN0b3Agb2Zmc2V0PSI2MyUiIHN0b3AtY29sb3I9IiMwNDA0MDQiIHN0b3Atb3BhY2l0eT0iMCIvPgogICAgPHN0b3Agb2Zmc2V0PSI5OSUiIHN0b3AtY29sb3I9IiNhMGEwYTAiIHN0b3Atb3BhY2l0eT0iMC42NSIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjYTRhNGE0IiBzdG9wLW9wYWNpdHk9IjAuNjUiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
+									     background: -moz-linear-gradient(top,  rgba(0,0,0,0) 62%, rgba(4,4,4,0) 63%, rgba(160,160,160,0.65) 99%, rgba(164,164,164,0.65) 100%); /* FF3.6+ */
+									     background: -webkit-gradient(linear, left top, left bottom, color-stop(62%,rgba(0,0,0,0)), color-stop(63%,rgba(4,4,4,0)), color-stop(99%,rgba(160,160,160,0.65)), color-stop(100%,rgba(164,164,164,0.65))); /* Chrome,Safari4+ */
+									     background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 62%,rgba(4,4,4,0) 63%,rgba(160,160,160,0.65) 99%,rgba(164,164,164,0.65) 100%); /* Chrome10+,Safari5.1+ */
+									     background: -o-linear-gradient(top,  rgba(0,0,0,0) 62%,rgba(4,4,4,0) 63%,rgba(160,160,160,0.65) 99%,rgba(164,164,164,0.65) 100%); /* Opera 11.10+ */
+									     background: -ms-linear-gradient(top,  rgba(0,0,0,0) 62%,rgba(4,4,4,0) 63%,rgba(160,160,160,0.65) 99%,rgba(164,164,164,0.65) 100%); /* IE10+ */
+									     background: linear-gradient(to bottom,  rgba(0,0,0,0) 62%,rgba(4,4,4,0) 63%,rgba(160,160,160,0.65) 99%,rgba(164,164,164,0.65) 100%); /* W3C */
+									     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6a4a4a4',GradientType=0 ); /* IE6-8 */
+									 }
+
+#wrapper                             {
+                                         margin: 0px auto;
+                                         max-width: 1100px;
+                                     }
+
+#my-cute-slider                      {
+                                         height: 440px;
+                                         position: relative;
+                                         width: 1100px;
+                                     }
+
+#header,
+#footer                              {
+                                         background: #2b2b2b;
+                                         height: 200px;
+                                         margin: 0 auto 12px auto;
+                                         padding: 1px;
+                                         position: relative;
+                                         width: 95%;
+                                     }
+
+#top-menu                            {
+                                         margin: 0 auto;
+                                         text-align: right;
+                                         width: 95%;
+                                     }
+
+#login-form                          {
+                                         -moz-border-radius: 4px;
+                                         -moz-box-shadow: 0 0 5px #000;
+                                         -webkit-border-radius: 4px;
+                                         -webkit-box-shadow: 0 0 6px #000;
+                                         background: #2b2b2b;
+                                         border: solid 2px #fff;
+                                         box-shadow: 0 0 5px #000;
+                                         color: white;
+                                         display: none;
+                                         left: 0;
+                                         line-height: 12px;
+                                         margin: 0;
+                                         opacity: 1;
+                                         padding: 0;
+                                         position: absolute;
+                                         text-align: left;
+                                         top: 0;
+                                     }
+
+#login-form input[type=button]       {
+                                         background-color: #000;
+                                         border: 0;
+                                         border: solid 1px #fff;
+                                         color: white;
+                                         cursor: pointer;
+                                         float: right;
+                                         padding: 6px 18px;
+                                         width: auto !important;
+                                     }
+
+#login-form input[type=button]:active
+                                     {
+                                         background-color: #4d4d4d;
+                                         border: solid 1px #fff;
+                                         color: #fff;
+                                     }
+
+#login-form input[type=button]:hover {
+                                         background-color: #fff;
+                                         color: #000;
+                                     }
+
+#login-form input                    {
+                                         margin: 0 12px 12px 12px
+                                     }
+
+#login-form label                    {
+                                         margin: 12px
+                                     }
+
+#login-form input,
+#login-form textarea                 {
+                                     
+                                     }
+
+#login-form label:first-child        {
+                                         margin-top: 36px
+                                     }
+
+.rounded                             {
+                                         -moz-border-radius-bottomright: 50px;
+                                         -moz-border-radius-topleft: 50px;
+                                         -webkit-border-bottom-right-radius: 50px;
+                                         -webkit-border-top-left-radius: 50px;
+                                         border-bottom-right-radius: 50px;
+                                         border-top-left-radius: 50px;
+                                     }
+
+.small-rounded                       {
+                                         -moz-border-radius-bottomright: 12px;
+                                         -moz-border-radius-topleft: 12px;
+                                         -webkit-border-bottom-right-radius: 12px;
+                                         -webkit-border-top-left-radius: 12px;
+                                         border-bottom-right-radius: 12px;
+                                         border-top-left-radius: 12px;
+                                     }
+
+#content                             {
+                                         margin: 0 auto;
+                                         text-align: center;
+                                         vertical-align: text-top;
+                                         width: 100%;
+                                     }
+
+.content-box-text                    {
+                                         margin: 0 auto 12px auto;
+                                         width: 80%;
+                                     }
+
+.one-third                           {
+                                         background: #2b2b2b;
+                                         color: white;
+                                         display: inline-block;
+                                         margin: 48px 4%;
+                                         text-align: left;
+                                         vertical-align: text-top;
+                                         width: 18%;
+                                     }
+
+.navbar .nav                         {
+                                         display: inline-block !important;
+                                         float: none !important;
+                                     }
+
+.nav td                              {
+                                         padding: 12px
+                                     }
+
+.content-pic                         {
+                                         height: auto;
+                                         margin-bottom: 12px;
+                                         margin-top: 50px;
+                                         width: 100%;
+                                     }
+
+#navigation                          {
+                                         background: #f78931;
+                                         height: 40px;
+                                         margin: 150px auto auto auto;
+                                         text-align: center;
+                                         width: 900px;
+                                     }
+
+#navigation a                        {
+                                     
+                                     }
+
+#navigation a:hover                  {
+                                         background: none !important;
+                                         color: #000;
+                                         text-decoration: none;
+                                         text-shadow: none !important;
+                                     }
+
+#navigation a:link,
+#navigation a:visited                {
+                                         color: #fff;
+                                         text-decoration: none;
+                                     }
+
+.dropdown-menu                       {
+                                         text-align: left
+                                     }
+
+.dropdown-menu li:hover              {
+                                         background-color: #d4d4d4 !important
+                                     }
+
+.dropdown-menu a                     {
+                                         color: #000 !important
+                                     }
+
+.dropdown-menu a:visited             {
+                                         color: #000 !important
+                                     }
+
+.top-links                           {
+                                         line-height: 40px;
+                                         margin: 12px 12px 0 12px;
+                                     }
+
+#logo                                {
+                                         left: 24px;
+                                         position: absolute;
+                                         top: 24px;
+                                     }
+
+#slider-container                    {
+                                         margin: 0 auto;
+                                         max-width: 1100px;
+                                         padding: 0 50px;
+                                         position: relative;
+                                         width: 85%;
+                                     }
+
+.shadow                              {
+                                         /* stretches it */
+                                         background: transparent url(../images/shadow.png) no-repeat bottom center;
+                                         background-size: 100% 100%;
+                                         height: 101px;
+                                         margin-top: -0px;
+                                         nowhitespace: afterproperty;
+                                         position: relative;
+                                         width: 100%;
+                                         z-index: -1;
+                                     }
+
+@media (max-width: 996px)            { 
+									    #navigation     {
+									                        font-size: 0.8em;
+									                        width: 94% !important;
+									                    }
+
+									    .sb-description {
+									                        padding: 0 10px !important
+									                    }
+
+									    .shadow         {
+									                        height: 40px !important
+									                    }
+                                     }
+

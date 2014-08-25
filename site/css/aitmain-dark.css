@@ -1,0 +1,810 @@
+/*!
+  Theme Name: Ahern IT Dark
+  Theme URI: http://AhernIT.com
+  Description: The dark theme for Ahern IT's website
+  Author: Brian Lee
+  Version: 1
+  License: Private/Restricted Ahern Rentals
+  Tags: css
+*/
+
+/*-----------------------------------------------------------*\
+    TABLE OF CONTENTS
+\*-----------------------------------------------------------*\
+    @ BASIC TAGS
+    @ HEADER
+    @ NAVIGATION AND LOGO
+    @ SLIDER
+    @ CONTENT
+    @ FOOTER
+    @ RESPONSIVE DESIGN SETTINGS
+
+\*-----------------------------------------------------------*/
+
+
+/*-----------------------------------------------------------*\
+    @ BASIC TAGS
+\*-----------------------------------------------------------*/
+@font-face {
+        font-family: dense;
+        font-weight: normal;
+        font-style: normal;
+        src: url(../fonts/Dense-Regular.otf) format("opentype");
+    }
+
+html                        {
+                            overflow-x: hidden
+                            }
+
+h1, h2, h3, h4              {
+                            font-family: dense,"sans-serif";
+                            margin-top: 3px;
+                            }
+
+h2                          {
+                            font-size: 300%;
+                            font-weight: normal;
+                            text-decoration: none;
+                            line-height: 40px;
+                            }
+
+body                        {
+                            font-family: Garamond;
+                            
+                            background: #4d4d4d;
+                            color: white;
+                            margin: 0;
+                            padding: 0;
+                            }
+
+a:hover,
+a:active                   {
+                            color:#59BAEF;
+                            text-decoration:none;
+                            white-space:nowrap;
+                            }
+
+a                           {
+                            outline:none;
+                            
+                            text-decoration:none;
+                            color: #1fa2d8; 
+                            white-space:nowrap;
+                            }
+
+a.link                      {
+                            font-family: dense, sans-serif;
+                            font-weight: 100;
+                            font-size:160%;
+                            background:transparent url(a-bg.png) no-repeat -81px bottom;
+                            background-position: -81px 12px;
+                            white-space:nowrap;
+                            }     
+
+select                      {
+                            padding: 4px 6px;
+                            margin: 0;
+                            width: 100%;
+                    -webkit-border-radius: 4px;
+                       -moz-border-radius: 4px;
+                            border-radius: 4px;
+                            font-size: 80%;
+                            font-weight: bold;
+                            background: #4d4d4d;
+                            color: #fff;
+                            border: none;
+                            outline: none;
+                            display: inline-block;
+                    -webkit-appearance: none;
+                       -moz-appearance: none;
+                            appearance: none;
+                            cursor: pointer;
+                            }
+/*---END-BASIC-TAGS------------------------------------------*/
+
+
+/*-----------------------------------------------------------*\
+    @ HEADER
+\*-----------------------------------------------------------*/
+
+#header                     {
+                            vertical-align: text-top;
+                            width: 100%;
+                            min-height: 50px;
+                            padding:6px 2%  6px 12px;
+                            white-space:nowrap;
+                            line-height: 100%;
+                            background: url("../img/sliderbgdark.png")!important;
+                       -moz-box-sizing: border-box;
+                    -webkit-box-sizing: border-box;
+                            box-sizing: border-box;
+                            }
+
+#contact-form               {
+                            width: 350px;
+                            display: none;
+                            margin:0;
+                            padding: 24px;
+                            left: 0;
+                            top: 0;
+                            opacity: 0.8;
+                            position: absolute;
+                            background: black;
+                            border: solid 1px #3b3b3b;
+                    -webkit-border-radius: 4px;
+                       -moz-border-radius: 4px;
+                            border-radius: 4px;
+                            }
+
+#contact-form input,  
+#contact-form textarea      {
+                            width: 100%;
+                            } 
+
+#contact-form input         {
+                            margin-bottom: 24px;
+                            }
+
+#contact-form 
+input[type=button]          {
+                            width: auto !important;
+                            margin: 24px 0 0 12px;
+                            float: right;
+                            border: 0;
+                            padding: 6px 12px;
+                            color: white;
+                            background-color: #000;
+                            border: solid 1px #fff;
+                            cursor: pointer;
+                            }
+
+#contact-form 
+input[type=button]:hover    {
+                            background-color: #fff;
+                            color: #000;
+                            }
+
+#contact-form 
+input[type=button]:active   {
+                            background-color: #4d4d4d;
+                            border: solid 1px #fff;
+                            color: #fff;
+                            }
+
+#contact-form textarea      {
+                            resize: none;
+                            height: 100px;
+                            margin: none;
+                            }
+
+#top-links                  {
+
+                            float:left;
+                            line-height: 40px;
+                            }
+
+.phone-number, 
+.phone-img                  {
+                            background: #000;
+                            height: 30px;
+                            float: right;
+                            font-weight: bold;
+                            font-size: 1.2em;
+                            padding: 12px;
+                            margin: 12px 0 0 0px;
+                            box-shadow: 0 8px 8px #000;
+                       -moz-box-shadow: 0 8px 8px #000;
+                    -webkit-box-shadow: 0 8px 8px #000;
+                            }
+
+.phone                      {
+                            float: right;
+                            cursor: pointer;
+                            }
+
+.phone-img                  {
+                            padding-top: 9px !important;
+                            border-right: solid 1px grey;
+                    -webkit-border-top-left-radius: 5px;
+                       -moz-border-radius-topleft: 5px;
+                            border-top-left-radius: 5px;
+                            }
+
+.phone-number               { 
+                    -webkit-border-top-right-radius: 5px;
+                       -moz-border-radius-topright: 5px;
+                            border-top-right-radius: 5px;
+                            }
+/*---END-HEADER----------------------------------------------*/
+
+
+
+/*-----------------------------------------------------------*\
+    @ NAVIGATION AND LOGO
+\*-----------------------------------------------------------*/
+
+#logo                       {
+                            position: absolute;
+                            top: 8px;
+                            left: 2%;
+                            }
+
+#nav-div                    {
+                            display: block;
+                            height: 108px;
+                            width: 100%;
+                            background: #000;
+                            border-top: solid 2px #3b3b3b;
+                            border-bottom: solid 2px #3b3b3b;
+                            margin: 0;
+                            box-shadow: 0 8px 8px #000;
+                       -moz-box-shadow: 0 8px 8px #000;
+                    -webkit-box-shadow: 0 8px 8px #000;
+                            position: absolute;
+                            }
+
+nav ul                      {
+                            display: inline;
+                            padding-left: 0;
+                            }
+
+nav li                      {
+                            position: relative;
+                            list-style: none;
+                            display: inline-block;
+                            margin: 0 65px;
+                            }
+
+nav ul li > ul > li         {
+                            margin-left: 0px;
+                            margin-right: 0px;
+                            padding: 0;
+                            }
+
+nav > ul > li               {
+                            font-family: dense, sans-serif;
+                            margin-left: 0;
+                            position: relative;
+                            margin-top: 60px;
+                            }
+
+nav > ul > li a:link        {
+                            color: #fff;
+                            text-decoration: none;
+                            }
+
+.submenu a:visited,
+.submenu a:link             {
+                            color: #fff;
+                            text-decoration: none;
+                            }
+
+.submenu a:hover            {
+                            color: #f46511;
+                            text-decoration: none;
+                            }
+
+nav > ul > li a:visited     { 
+                            color: #fff 
+                            }
+
+nav > ul > li a:hover       { 
+                            color: #f46511 
+                            }
+
+nav ul li ul                {
+                            box-shadow: none;
+                            width: 2000px;
+                            float: left;
+                            height: auto;
+                            margin-top: 12x;
+                            padding-bottom: 20px;
+                            padding-top: 10px;
+                            position: absolute;
+                            z-index: 10;
+                            text-align:center;
+                            display: none;
+                            left: 25px;
+                            }
+
+nav ul li:hover ul          {
+                            z-index: 10 
+                            }
+
+nav ul li ul li > div       {
+                            background-color: #2b2b2b;
+                            border: solid 1px black;
+                            position: relative;
+                            cursor: pointer;
+                            }
+
+nav ul li ul li > div:hover {
+
+                            background-color: #353736;
+                            box-shadow: 0px 0 6px 2px  #59baef;
+                       -moz-box-shadow: 0px 0 6px 2px  #59baef;
+                    -webkit-box-shadow: 0px 0 6px 2px #59baef;
+
+                            }
+nav ul li ul li div:hover a:link,
+nav ul li ul li div:hover a:visited,
+nav ul li ul li div:hover a:hover{ color: #f46511;}
+
+.submenu                    {
+                            margin: 0 12px;
+                            font-size: 140%;
+                            padding: 18px;
+                            display: inline-block;
+                    -webkit-border-radius: 2px;
+                       -moz-border-radius: 2px;
+                            border-radius: 2px;
+                    -webkit-transition: all 0.25s linear;
+                         -o-transition: all 0.25s linear;
+                       -moz-transition: all 0.25s linear;
+                        -ms-transition: all 0.25s linear;
+                    -kthtml-transition: all 0.25s linear;
+                            transition: all 0.25s linear;
+                            }
+
+.main_type_1                {
+                            color: #9BB94B;
+                            font-size: 160%;
+                            }
+
+.main_type_1  a             {
+                            font-weight: normal !important;
+                            }
+
+a:hover .main_type_1        {
+                            color: #E4E4E4 
+                            }
+
+#menu                       {
+                            width: 100%;
+                            margin: 0 auto;
+                            text-align: center;
+                            }
+
+nav select                  {
+                            display: none;
+                            margin-top: 60px;
+                            }
+
+
+.selectbox                  { 
+                            position: relative 
+                            }
+
+.selectbox:after            {
+                            content: '>';
+                            font: 11px"Consolas", monospace;
+                            color: #fff;
+                            filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0.083); /* IE6,IE7 */
+                        -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0.083)"; /* IE8 */
+                    -webkit-transform: rotate(90deg);
+                       -moz-transform: rotate(90deg);
+                        -ms-transform: rotate(90deg);
+                            right: 8px;
+                            top: -2px;
+                            
+                            font-size: 1.0em;
+                            padding: 0 0 2px;
+                            border-bottom: 0px solid #ddd;
+                            position: absolute;
+                            pointer-events: none;
+                            }
+
+.selectbox:before           {
+                            content: '';
+                            right: 6px;
+                            top: -2px;
+                            width: 20px;
+                            height: 20px;
+                            background: #4d4d4d;
+                            position: absolute;
+                            pointer-events: none;
+                            display: block;
+                            }
+                            
+.selectbox:after,
+.selectbox:before           { 
+                            display: none 
+                            }
+/*---END-NAVIGATION-AND-LOGO---------------------------------*/
+
+
+/*-----------------------------------------------------------*\
+    @ SLIDER
+\*-----------------------------------------------------------*/
+#slider                     {
+                            position: relative;
+                            height: 100%;
+                            width: 100%;
+                            top: 108px;
+                            padding-bottom: 24%;
+                            background: url("../img/sliderbgdark.png")!important;
+                            margin: 0 auto;
+                            z-index: -1;
+                            }
+
+.panel                      {
+                            display: none;
+                            position: absolute;
+                            z-index: 10;
+                            }
+
+#slider-container           {
+                            background: #fff;
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                            z-index: -1000;
+                            margin: 0 auto;
+                            width: 60%;
+                            background: black;
+                            box-shadow: 4px 0 60px #000, -4px 0 60px #000;
+                       -moz-box-shadow: 4px 0 60px #000, -4px 0 60px #000;
+                    -webkit-box-shadow: 4px 0 60px #000, -4px 0 60px #000;
+                            }
+
+#slider-nav-top             {
+                            position: relative;
+                            background: #f46511;
+                            height: 24px;
+                            margin-top: 108px;
+                            box-shadow: 0 -15px 12px #000;
+                       -moz-box-shadow: 0 -15px 12px #000;
+                    -webkit-box-shadow: 0 -15px 12px #000;
+                            }
+
+#slider-nav                 {
+                            background: #acd;
+                            color: #000;
+                            font-family: dense, sans-serif;
+                            font-size: 150%;
+                            }
+
+#slider-container ul        {
+                            list-style: none;
+                            margin: 0 0 0 0;
+                            padding: 0;
+                            display: block;
+                            background: black;
+                            }
+
+#slider-thumb-container     {
+                            width: 100%;
+                            margin: 0 auto;
+                            text-align: center;
+                            white-space: nowrap;
+                            }
+
+.slider-thumb               {
+                            position: relative;
+                            width: 150px;
+                            height: 100px;
+                            display: inline-block;
+                            margin: 12px 24px 5px 24px;
+                            padding: 12px;
+                            cursor: pointer;
+                            font-size: 1em;
+                            font-weight: bold;
+                            vertical-align: top;
+                            text-align: center;
+                            }
+
+.slider-thumb span          {
+                            display: block;
+                            margin-top: 24px;
+                            vertical-align: middle;
+                            opacity: 0.7;
+                            }
+
+.slider-thumb img           {
+                            display: block;
+                            margin: 12px auto 0 auto;
+                            vertical-align: middle;
+                            opacity: 0.7;
+                            }
+
+.shadow-fade                {
+                            position: absolute;
+                            width: 100%;
+                            height: 100%;
+                            top: -2px;
+                            left: -2px;
+                            background: none;
+                            border-bottom: solid 6px #2b2b2b;
+                            opacity: 0;
+                            }
+
+.slider-img                 {
+                            position: relative;
+                            display: block;
+                            width: 100%;
+                            height: auto;
+                            margin: 0;
+                            }
+/*---END-SLIDER----------------------------------------------*/
+
+
+
+/*-----------------------------------------------------------*\
+    @ CONTENT
+\*-----------------------------------------------------------*/
+
+.content                    {
+                            background: #fff;
+                            color: #201c1e;
+                            font-size: 1em;
+                            padding: 24px;
+                            line-height: 1.2em;
+                            }
+
+.content-img                {
+                            display: block;
+                            vertical-align: middle;
+                            float: right;
+                            margin: 0 12px 12px 24px;          
+                       -moz-box-shadow: 0px 0px 5px #2b2b2b;
+                    -webkit-box-shadow: 0px 0px 5px #2b2b2b;
+                            box-shadow: 0px 0px 5px #2b2b2b;
+                            border: 6px solid #fff;
+                            }
+
+.align-middle               {
+                            width: 60%;
+                            margin: 0 auto;
+                            overflow: hidden;
+                            }
+
+#main-content               {
+                            margin-top: 120px !important;
+                            min-height: 350px;
+                            overflow: hidden;
+                            font-size: 110%;
+                            line-height: 200%;
+                            }
+
+#cloud-comp-content,
+#virtu-sol-content,
+#voip-content               {
+                            display: none;
+                            margin: 0;
+                            }
+
+#network-inf-content        {
+                            margin: 0;
+                            }
+
+.content p                  {
+                            margin: 0 auto 12px auto;
+                            }
+/*---END-CONTENT---------------------------------------------*/
+
+
+
+/*-----------------------------------------------------------*\
+    @ FOOTER
+\*-----------------------------------------------------------*/
+#footer-nav                 {
+                            
+                            background: #000;
+                            }
+
+#footer                     { 
+                            height: 24px;
+                            font-size: 70% !important;
+                            padding: 24px;
+                            text-align: center;
+                            }
+#ait-footer                 {
+                            padding-top: 48px;
+                            width:60%;
+                            margin: 0 auto;
+                            }
+div.footer-top,
+div.footer-bottom           {
+                            display: table;
+                            
+                            vertical-align: middle;
+                            }
+#footer-description         {float: left; width: 30%; padding: 24px 24px 48px 24px; text-align: justify; line-height: 18px}
+#footer-logo{display: block; margin: 0 auto;}
+.3-container                {display: table;vertical-align: middle;}
+div.footer-top              {}
+div.footer-bottom           {display: table-cell;
+height: 100px;
+padding: 24px;
+border-top: solid 1px white;}
+div.footer-top-content      {display: table-cell;
+    height: 200px;
+                            vertical-align: middle;
+                            border-left: 1px solid white;
+                            line-height: 24px;
+                            padding: 12px;
+                            padding-top: 36px;
+                            text-align: center;
+                            }
+
+
+/*---END-FOOTER----------------------------------------------*/
+
+
+
+/*-----------------------------------------------------------*\
+   @ RESPONSIVE DESIGN SETTINGS
+\*-----------------------------------------------------------*/
+@media (max-width: 1300px)  { 
+                            #footer-logo{width: 200px; height: auto;}
+                            .content-img{float: none ; margin: 0 auto; width: 100%; height: auto;}
+                            }
+@media (max-width: 1068px)  { 
+                            #footer-logo{width: 150px; height: auto;}
+                            #ait-footer{width: 100%;}
+                            }
+
+@media (max-width: 980px)   { 
+                            nav ul              { 
+                                                display: none 
+                                                }
+
+                            nav select          { 
+                                                display: inline-block 
+                                                }
+
+                            .selectbox:after    { 
+                                                display: inline 
+                                                }
+
+                            .selectbox:before   { 
+                                                display: block 
+                                                }
+
+                            .slider-thumb       {
+                                                width: 84px !important;
+                                                height: 60px !important;
+                                                margin: 0 6px !important;
+                                                }
+
+                            #slider-container   { 
+                                                width: 100% 
+                                                }
+
+                            #menu               { 
+                                                width: 100% !important 
+                                                }
+
+                            .content p          { 
+                                                width: 100% !important 
+                                                }
+
+                            #logo               { 
+                                                height: 50px 
+                                                }
+
+                            #slider             { 
+                                                
+                                                padding-bottom: 40% 
+                                                }
+
+                            #logo img           { 
+                                                height: 50px 
+                                                }
+
+                            select              { 
+                                                width: 96% 
+                                                }
+
+                            .slider-thumb span  { 
+                                                display: none !important 
+                                                }
+
+                            .slider-thumb img   {
+                                                width: 40px;
+                                                height: auto;
+                                                }
+
+                            .shadow-fade        { 
+                                                top: -6px !important 
+                                                }
+
+                            #main-content       {
+                                                height: auto !important; 
+                                                font-size: 90%;
+                                                }
+
+                            
+
+                            .content-img        {
+                                width: 40%; height: auto;
+                                               float: right !important; margin: 0 6px 12px 24px;
+                                                
+                                                }
+
+                            .align-middle       {
+                                                width: 100%;
+                                                }
+
+                            #header             {
+                                                overflow: hidden;
+                                                z-index: 4000px;
+                                                background: black;
+                                                margin-top: 108px;
+                                                left: 0;
+
+                                                font-size: 170%;
+                                                font-weight: 700;
+                                                }
+
+                            #nav-div            {
+                                                position: fixed;
+                                                top: 0 !important;
+                                                z-index: 9999;
+                                                box-shadow: none;
+                                                -moz-box-shadow: none;
+                                                -webkit-box-shadow: none;
+                                                border: 0;
+                                                }
+
+                            #slider             {
+                                                top: 0;
+                                                }
+
+                            #contact-form       {
+                                                top: 138px !important;
+                                                width: 100% !important;
+                                           -moz-box-sizing: border-box;
+                                        -webkit-box-sizing: border-box;
+                                                box-sizing: border-box;
+                                                }
+
+                            #header             { 
+                                                text-align: center;
+                                                }
+
+                            #top-links, 
+                            #phone-number       {
+                                                width: 100%;
+                                                }
+
+                            #menu               { 
+                                                width: 90% 
+                                                }
+
+                            .content            { 
+                                                font-size: 0.8em 
+                                                }
+                            #slider-nav-top     {margin-top: 0 !important;}
+                            .phone              {display: none;}
+                            }
+@media (max-width: 885px)   { 
+                            #header{font-size: 130%;}
+                            }
+@media (max-width: 680px)   { 
+                            .content-img{width: 100%;}
+                            #slider{display: none;}
+                            #header{font-size: 100%;}
+                            }
+@media (max-width: 547px)   { 
+                            
+                            #header{font-size: 80%;}
+                            .content-img       {  
+                                                display: none;
+                                                }
+                            }
+
+@media (max-width: 390px)   { 
+                            #header             {
+                                                font-size: 0.6em;
+                                                font-weight: bold;
+                                                }
+                            }
+
+/* Targetting Webkit browsers only. FF will show the dropdown arrow with so much padding. */
+@media screen and (-webkit-min-device-pixel-ratio:0)   { 
+                                                    select         { padding-right: 18px }
+                                                    }
+/*---END-RESPONSIVE-DESIGN-SETTINGS----------------*/

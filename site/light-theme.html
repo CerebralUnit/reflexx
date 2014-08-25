@@ -1,0 +1,268 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		
+		<link rel="stylesheet" type="text/css" href="css/aitmain-light.css">
+<script type="text/javascript" src="js/sweet-justice.js"></script>
+<script type="text/javascript">
+document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')
+</script>
+			
+			<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+			<script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
+			<script type="text/javascript" src="js/jquery.easing.js"></script>
+
+
+			<script>
+	 // DOM ready
+	 $(function() {
+	   
+     var sel = $('<select id="drop-menu">');
+    $("<option />", {
+        "selected": "selected",
+            "value": "",
+            "text": "Go to..."
+    }).appendTo(sel);
+    $('nav').append(sel);
+    $('#drop-menu').wrap('<label class="selectbox"></label>')
+    $('nav').find('.topUl').each(function () {
+        var group = $('<optgroup>')
+            .prop('label', $(this).find('span').text());
+        sel.append(group);
+
+        $(this).find('ul>li').each(function () {
+            var href = $(this).find('a').attr('href'),
+            	opt = $('<option>').text($(this).find('a').text()).attr('value', href);
+            group.append(opt);
+        });
+    });
+      
+	   // To make dropdown actually work
+	   // To make more unobtrusive: http://css-tricks.com/4064-unobtrusive-page-changer/
+      $("nav select").change(function() {
+        window.location = $(this).find("option:selected").val();
+      });
+	 
+	 });
+	</script>
+
+	</head>
+	<body>
+<div id="header">
+    <div id="top-links">
+        <a href="#" class="link">Info Center</a> | <a href="#" class="link">How to Purchase</a>  |  <a href="#" class="link">Customer Support</a> | <a href="#" class="link">Research</a> | <a href="#" class="link">News</a> | <a href="#" class="link" id="contact">Contact Us</a>
+    </div>
+<div class="phone">
+    <div class="phone-number">
+         702 555-5555
+    </div>
+    <div class="phone-img">
+        <img src="img/phone.png">
+    </div>
+</div>
+</div>
+<div id="nav-div">
+	<div id="logo">
+		<img src="img/ait-site-logo-dark.png" />
+	</div>
+	<div id="menu">
+    <nav id="nav">
+        <ul>
+            <li class="topUl"> <span class="main_type_1"> <a href="#" title="Nav Link 1">Products</a>
+
+                </span>
+
+                <ul>
+                    <li>
+                        <div class="submenu"><a href="http://www.google.com" title="Nav Link 1">Product 1</a></div>
+                    </li>
+                    <li>
+                       <div class="submenu"> <a href="#" title="Nav Link 1">Product 2</a></div>
+                    </li>
+                    <li>
+                       <div class="submenu"> <a href="#" title="Nav Link 1">Product extra 3</a></div>
+                    </li>
+                                        <li>
+                       <div class="submenu"> <a href="#" title="Nav Link 1">Product W 4</a></div>
+                    </li>
+                                        <li>
+                       <div class="submenu"> <a href="#" title="Nav Link 1">Product 5</a></div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <ul>
+            <li class="topUl"> <span class="main_type_1"> <a href="#" title="Nav Link 2">Services</a>
+
+                </span>
+
+                <ul>
+                    <li>
+                        <div class="submenu"><a href="#" title="Nav Link 1">Service 1</a></div>
+                    </li>
+                    <li>
+                        <div class="submenu"><a href="#" title="Nav Link 1">Service 2</a></div>
+                    </li>
+                    <li>
+                        <div class="submenu"><a href="#" title="Nav Link 1">Service 3</a></div>
+                    </li>
+                    <li>
+                        <div class="submenu"><a href="#" title="Nav Link 1">Service 4</a></div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <ul>
+            <li class="topUl"> <span class="main_type_1"> <a href="#" title="Nav Link 2">Solutions</a>
+
+                </span>
+
+                <ul>
+                    <li>
+                        <div class="submenu"><a href="#" title="Nav Link 1">Submenu Testing</a></div>
+                    </li>
+                    <li>
+                        <div class="submenu"><a href="#" title="Nav Link 1">Submenu Testing</a></div>
+                    </li>
+                    <li>
+                        <div class="submenu"><a href="#" title="Nav Link 1">Submenu Testing</a></div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <ul>
+            <li class="topUl"> <span class="main_type_1"> <a href="#" title="Nav Link 2">Partners</a>
+
+                </span>
+
+                <ul>
+                    <li>
+                        <div class="submenu"><a href="#" title="Nav Link 1">Submenu Testing</a></div>
+                    </li>
+                    <li>
+                        <div class="submenu"><a href="#" title="Nav Link 1">Submenu Testing</a></div>
+                    </li>
+                    <li>
+                        <div class="submenu"><a href="#" title="Nav Link 1">Submenu Testing</a></div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</div>
+</div>
+<div id="slider">
+    <div id="slider-container">
+    	<ul>
+            <li class="panel" id="panel-1">
+                <img class="slider-img" id="img1" src="img/tech.jpg" />
+            </li>
+            <li class="panel" id="panel-2">
+                <img class="slider-img"  id="img2" src="img/hero_passage_3.jpg" />
+            </li>
+                  
+            <li class="panel" id="panel-3">
+                <img class="slider-img"  id="img3" src="img/sky1-1200x480.jpg" />
+            </li>
+            <li class="panel" id="panel-4">
+                <img class="slider-img"  id="img4" src="img/contemporary-computer-table-casters-89126-5237929.jpg" />
+            </li>      
+        </ul>
+    	</div>
+</div>
+<div id="slider-nav-top"></div>
+<div id="slider-nav">
+    <div id="slider-thumb-container">
+    <div id="thumb1" class="slider-thumb"><img src="img/network-icon.png" /><span>Network Infrastructure</span><div class="shadow-fade"></div></div>
+    <div id="thumb2" class="slider-thumb"><img src="img/cloud-icon.png" /><span>Cloud Computing</span><div class="shadow-fade"></div></div>
+    <div id="thumb3" class="slider-thumb"><img src="img/virtu-icon.png" /><span>Virtualization Solutions</span><div class="shadow-fade"></div></div>
+    <div id="thumb4" class="slider-thumb"><img src="img/voip-icon.png" /><span>VOIP</span><div class="shadow-fade"></div></div>
+    </div>
+</div>
+<div id="main-content" class="content sweet-justice">
+    <div class="align-middle">
+    <div class="main-page-content" id="network-inf-content">
+        <img class="content-img" src="img/netinf.jpg">
+        <h2>Intelligent End-to-End Network Solutions</h2>
+
+
+        <p>Application-driven, service-oriented architectures (SOA) and virtualization have banished the client-server model from the data center. Cloud computing, too, makes heavy use of server virtualization, which reshapes data center traffic flows and increases bandwidth demands at the server edge. By 2014, network planners should expect more than 80 percent of traffic in the data center's local area network (LAN) to be between servers.
+
+        <p>These efforts at flexibility can be hampered by legacy data center networks. They cannot provide high enough bandwidth and low enough latency between server connections to support highly mobile virtual workloads.
+
+    </div>
+    <div class="main-page-content" id="cloud-comp-content">
+         <img class="content-img" src="img/cloud.jpg">       
+        <h2>Control Your Data</h2>
+
+
+        <p>Ahern IT Virtualization Services are a suite of consulting, implementation and support services that help clients realize the results that virtualization promises. Through Virtualization Services we help clients develop a virtualization strategy that matches each business and IT needs.
+
+        <p>The drive to virtualization for data centers and clients promises to reduce both acquisition costs and operations expenditures. And it can give IT more control over a complex environment. In turn, we promise clients equal or better service than they would receive with dedicated resources.
+
+
+        
+
+
+
+
+
+    </div>
+    <div class="main-page-content" id="virtu-sol-content">
+        <img class="content-img" src="img/virtu.jpg">
+        <h2> Reduce Costs and Improve Service Levels</h2>
+
+        <p>Delivery options now range from traditional environments to virtualized platforms: Software as a Service (SaaS), Platform as a Service (PaaS), Infrastructure as a Service (IaaS), and Business Process Outsourcing (BPO). 
+
+        <p>Clients are increasingly turning to Ahern IT for expertise and guidance to help them maneuver through the hype, benefits, and pitfalls of a cloud solution.
+        
+    </div>
+    <div class="main-page-content" id="voip-content">
+        <img class="content-img" src="img/voip.jpg">
+         <h2> The Very Best in Mobile Connectivity</h2>
+         <p>Mobility is transforming business and life. Today, human interactions are the most important part of mobility. Social media has transformed processes the way we live and interact with each other.  We live in an era of new social behavior driven by the world economy and an "always-on" capability.
+
+
+        <p>As a leading global system integration company, Ahern IT's mobile computing solutions are part of our comprehensive lifecycle services portfolio designed to address the new age of collaboration and communications by providing the very best in mobile software, hardware, connectivity, and services solutions to efficiently mobilize and increase the productivity of today's ever increasing virtual workforce.
+    </div>
+</div>
+
+</div>
+
+<div id="footer-nav">
+        <div id="ait-footer">
+            <div class="footer-top">
+                <div id="footer-description">
+                    <img id="footer-logo" src="img/ait-site-logo-dark.png" alt=""><br>
+                    <div id="description">As a leading system integrator, Ahern IT is a strong and independent IT compass that guides our customers to success. Our team of expert sales consultants, solution architects, engineers, project managers, and technicians are dedicated to ensure that your unique project is completed on time and on budget.</div>
+                </div>
+
+                <div class="3-container">
+                    <div class="footer-top-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil, voluptas.</div>
+                    <div class="footer-top-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo, quos.</div>
+                    <div class="footer-top-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, aliquam.</div>
+                </div>
+            </div>
+        <div>
+            <div class="footer-bottom">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, assumenda!</div>
+            <div class="footer-bottom">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, quaerat.</div>
+            <div class="footer-bottom">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet, possimus.</div>
+            <div class="footer-bottom">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis, quas.</div>
+        </div>
+        </div>
+</div>
+
+    <div id="footer">
+        &copy;2012-2013 Ahern IT Inc. All Rights Reserved.
+    </div>
+            <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.js"></script>
+            <script type="text/javascript" src="js/elastic-menu-version-2.js"></script>
+            <script type="text/javascript" src="js/simple-slider-version-2.js"></script>
+            <script type="text/javascript" src="js/helium.js"></script>
+            <script type="text/javascript" src="js/cool-links.js"></script>
+            <script type="text/javascript" src="js/jquery.backgroundpos.min.js"></script>
+            <script type="text/javascript" src="js/contact-dropdown.js"></script>
+	</body>
+
+</html>
